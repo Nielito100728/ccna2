@@ -322,30 +322,33 @@ Top 5 UTM: 1.FortinetFortigate: syet
 
 Firewall Profile no.1: use ExtendedACL vs NamedExtendedAcl:
 ex.1: you are the Blue Team/SOC guys for pogo sites:
-www.web310.com open only http, https, ping
-www.web311.com open only dns, https, ssh       ==> 6 lines:
+ebet10.com open only http, https, ping 80, 443, icmp
+ebet11.com open only dns, https, ssh    53,443,22   ==> 6 lines:
   GOLDEN  FIREWALL FORMULA:  paloalto,fortinet,cisco,checkpoint.
    protocol         hacker    victim       port
 tcp,udp,icmp,IP     Any      web310/11
 Config t
+ip host ebet10.com 192.168.103.10
+ip host ebet11.com 192.168.103.11
 service timestamps log datetime
 service timestamps debug datetime
-logging 10.m.1.10
+logging 10.21.1.10
+!! How to sumbong to splunk logs
 logging trap 5
-NO IP access-list Extended FWP1
-IP access-list Extended FWP1
- Permit tcp Any host www.web310.com eq 80 log
- Permit tcp Any host www.web310.com eq 443 log
- Permit icmp Any host www.web310.com log
- Permit tcp Any host www.web311.com eq 53 log
- Permit tcp Any host www.web311.com eq 443 log
- Permit tcp Any host www.web311.com eq 22 log
+NO IP access-list Extended NGFW1
+IP access-list Extended NGFW1
+ Permit tcp Any host ebet10.com eq 80 log
+ Permit tcp Any host ebet10.com eq 443 log
+ Permit icmp Any host ebet10.com log
+ Permit tcp Any host ebet11.com eq 53 log
+ Permit tcp Any host ebet11.com eq 443 log
+ Permit tcp Any host ebet11.com eq 22 log
  Int Gi 3
-  ip access-group FWP1 in
+  ip access-group NGFW1 in
 REMOVE FIREWALL:
 CONfig t
  Int Gi 3
-  NO ip access-group FWP1 in
+  NO ip access-group NGFW1 in
 end
 
 TAKASSSSSSSSG:  control shift 6 bitaw X
@@ -1053,6 +1056,7 @@ https:///restconf/data/Cisco-IOS-XE-native:native/interface/Loopback
 
 HomeWork for the Hardest Day in CCNA: 
 CSr, linuxdocker, pythondocker, Postman: RestApi.
+
 
 
 
