@@ -296,7 +296,8 @@ Int Range fa0/10-12
  switchport trunk Encap Dot1Q
  switchport mode trunk
  switchport trunk allowed vlan 1-100
- no shut
+ switchport trunk native vlan 1 
+no shut
  do sh int trunk
 Dot1q = Qupid,mave switches love each other:
       IEEE standard where SW will from Layer 2 trunks
@@ -728,6 +729,7 @@ how to get certified:
 2. Lab: NAT and DHCP:
 
 3. ask sa CHAT: "latest reivewer"
+
 
 
 
